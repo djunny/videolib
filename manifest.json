@@ -1,0 +1,26 @@
+{
+	"name": "视频库",
+	"version": "1.0.0.0",
+	"description": "视频库",
+	"content_scripts": [
+	    {
+            "matches":[""],
+            "run_at": "document_end",
+            "css":[],
+	    "js": [],
+            "all_frames":false
+	    }
+        ],
+    "icons": {
+        "16": "icon16.png",
+        "72": "icon72.png"
+    },
+    "app": {
+        "launch": {
+            "web_url": "wdj-extension://__MSG_@@extension_id__/test/index.htm"
+        },
+      "navigation": [
+      ]
+    },
+    "permissions": ["http://www.youku.com/*","http://v.youku.com/*","http://www.tudou.com/*","http://video.sina.com.cn/*"]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="../src/videolib.js"></script>
+<script type="text/javascript" src="../src/http.js"></script>
+<script type="text/javascript" src="../src/youku.js"></script>
+<script type="text/javascript" src="../src/sina.js"></script>
+</head>
+
+<body>
+输入url(一行一个):<br />
+
+<textarea id="urls" style="width:600px;height:300px;border:1px solid #CCC">
+http://v.youku.com/v_show/id_XNDY2NjQ0ODMy.html
+http://v.youku.com/v_show/id_XNDgzODUxMTQw.html
+http://v.youku.com/v_show/id_XNDg0MjA4MDMy.html
+http://video.sina.com.cn/p/news/c/v/2012-12-29/220561961141.html
+</textarea><br />
+
+<button type="button" id="btn">开始获取</button>
+<div id="result">
+
+</div>
+<script type="text/javascript">
+(function(window, document, undefined){
+	var $ = function(o){return document.getElementById(o);}
+	$('btn').onclick = function(){
+		var urls = $('urls').value.replace(/^\s*|\s*$/ig, '').split(/\n/g);
+		for(var i in urls){
+			videoLib.parseDownloadUrl(urls[i], function(fromUrl, downUrl){
+				var ahref = '<a href="download#urls='+downUrl.join('|')+'&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
+				console.log(fromUrl);
+				console.log(downUrl);
+				$('result').innerHTML+=ahref+'<br />';
+			});
+		}
+	}
+})(window, document)
+
+</script>
+</body>
+</html>
