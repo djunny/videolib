@@ -1,6 +1,7 @@
 (function(videoLib){
 	var opt = {
 				matches  : [/^http\:\/\/v\.youku\.com\/v_show\/id_([\w=]+).html$/ig],
+				
 				download : false,
 				requestHeader : {"User-Agent":"ipad"},  
 				callback : function(url, response, successCallback){

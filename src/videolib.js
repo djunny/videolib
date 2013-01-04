@@ -15,6 +15,7 @@
 		var self = this, ruleList = [];
 		self.strCut = strCut;
 		self.match = match;
+		self.clientIp = '';
 		//match rule urls
 		function matchRules(url, matches){
 			var index = matches.length;
@@ -36,6 +37,7 @@
 				
 				options = {
 					matches  : ['http://123asdf.com', /http\:\/\/youku\.com\//ig],
+					infoPattern : {title:""}
 					download : false,
 					requestHeader : {"User-Agent":"", "Referer":""},  
 					callback : function(url, response, successCallback){
@@ -54,6 +56,16 @@
 			
 		}
 		
+		
+		self.matchUrls = function(url){
+			var index = ruleList.length, rule;
+			while(index--){
+				rule = ruleList[index];
+				if(matchRules(url, rule['matches'])){
+					return true;
+				}
+			}
+		}
 		
 		//parse download true url
 		/*
@@ -77,22 +89,63 @@
 						window.http(url, rule['requestHeader'], function(response, succ){
 							if(succ){
 								rule['callback'](url, response.responseText, function(trueUrl){
-									callback(url, trueUrl);
+									if(!trueUrl){
+										self.tryFlvcd(url, callback);
+									}else{
+										callback(url, trueUrl);
+									}
 								});
 							}
 						});
 					}else{
 						//callback
 						rule['callback'](url, null, function(trueUrl){
-							callback(url, trueUrl)
+							if(!trueUrl){
+								self.tryFlvcd(url, callback);
+							}else{
+								callback(url, trueUrl);
+							}
 						});
 					}
 					return true;
 					break;
 				}
 			}
+			
+			self.tryFlvcd(url, callback);
+			
 			return false;
 		}
+		
+		
+		//try flvcd source
+		self.tryFlvcd = function(url, callback){
+			var parseUrl = 'http://www.flvcd.com/parse.php?format=&sbt=提交&kw='+encodeURIComponent(url);
+			http(parseUrl, {}, function(response, success){
+				var html = response.responseText;
+				var urlHtml  = videoLib.strCut(html, '下载地址：', '</td>'), arr, aHrefRe = /<a href=\"([^"]*?)\"/ig, urlList = [];
+				
+				if(urlHtml.length>0){
+					while((arr = aHrefRe.exec(urlHtml)) !=null){
+						urlList.push(arr[1].replace(/\&amp;/ig, '&'));
+					}
+				}
+				callback(url, urlList);
+			});
+		}
+		
+		//get ip from ip138 
+		self.getIp = function(){
+			if(self.clientIp == ''){
+				http('http://iframe.ip138.com/ic.asp', {}, function(response, success){
+					if(success){
+						self.clientIp = self.strCut(response.responseText, '您的IP是：[', ']');
+					}
+				});
+			}
+			return self.clientIp;
+		}
+		
 		return self;
 	}
 	

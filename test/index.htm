@@ -7,36 +7,94 @@
 <script type="text/javascript" src="../src/http.js"></script>
 <script type="text/javascript" src="../src/youku.js"></script>
 <script type="text/javascript" src="../src/sina.js"></script>
+<script type="text/javascript" src="../src/sohu.js"></script>
+<script type="text/javascript" src="./jquery.js"></script>
 </head>
 
 <body>
-输入url(一行一个):<br />
+<p>
+从目录获取地址列表：<input type="text" value="http://www.youku.com/" id="listurl" /> <button type="button" id="spiderbtn">分析</button>
+</p>
 
+输入url(一行一个):<br />
 <textarea id="urls" style="width:600px;height:300px;border:1px solid #CCC">
 http://v.youku.com/v_show/id_XNDY2NjQ0ODMy.html
 http://v.youku.com/v_show/id_XNDgzODUxMTQw.html
 http://v.youku.com/v_show/id_XNDg0MjA4MDMy.html
 http://video.sina.com.cn/p/news/c/v/2012-12-29/220561961141.html
+http://tv.sohu.com/20121127/n358826127.shtml
+http://tv.sohu.com/20121214/n360465550.shtml
+http://tv.sohu.com/20120928/n354133586.shtml
+http://www.tudou.com/programs/view/SUTBLY8Y4B8/?fr=rec2
 </textarea><br />
-
 <button type="button" id="btn">开始获取</button>
 <div id="result">
 
 </div>
 <script type="text/javascript">
 (function(window, document, undefined){
-	var $ = function(o){return document.getElementById(o);}
-	$('btn').onclick = function(){
-		var urls = $('urls').value.replace(/^\s*|\s*$/ig, '').split(/\n/g);
-		for(var i in urls){
-			videoLib.parseDownloadUrl(urls[i], function(fromUrl, downUrl){
-				var ahref = '<a href="download#urls='+downUrl.join('|')+'&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
-				console.log(fromUrl);
-				console.log(downUrl);
-				$('result').innerHTML+=ahref+'<br />';
-			});
+	
+	$('#btn').click(function(){
+		var i, urls = $('#urls').val().replace(/^\s*|\s*$/ig, '').split(/\n/g), index = 1, taskCount = urls.length;
+		console.log(taskCount);
+		if(taskCount>0){
+			
+			$('#result').html('<p>共'+urls.length+'个URL <span id="resultCount"></span>：</p>');
+			
+			function showUrls(fromUrl, downUrl){
+				var ahref;
+				if(!downUrl){
+					ahref = fromUrl+': fetch error';
+				}else{
+					console.log(fromUrl);
+					console.log(downUrl);
+					ahref = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
+				}
+				
+				$('#result').append((index++)+'、'+ahref+'<br />');
+				--taskCount;
+				$('#resultCount').html('还有 '+taskCount+'');
+			}
+			
+			function runTask(url){
+				videoLib.parseDownloadUrl(url, function(fromUrl, downUrl){
+					//
+					showUrls(fromUrl, downUrl);
+					if(i < urls.length){
+						runTask(urls[++i]);
+					}
+				});
+			}
+			for(i in urls){
+				if(urls[i]){
+					runTask(urls[i]);
+					if(i>10)break;
+				}
+			}
 		}
-	}
+	});
+	
+	$('#spiderbtn').click(function(){
+		var url = $('#listurl').val();
+		http(url, {}, function(response, success){
+			if(success){
+				var html = response.responseText;
+				var responseDom = $(html);
+				$('#urls').val('');
+				var urls = [], urlExists = [];
+				responseDom.find('a').each(function(){
+					var url = $(this).attr('href');
+					if(url && videoLib.matchUrls(url)){
+						if(!urlExists[url]){
+							urlExists[url] = 1;
+							urls.push(url);
+						}
+					}
+				});
+				$('#urls').val(urls.join('\r\n'));
+			}
+		});
+	});
 })(window, document)
 
 </script>
