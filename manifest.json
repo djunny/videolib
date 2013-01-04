@@ -22,13 +22,11 @@
       "navigation": [
       ]
     },
-    "permissions": ["http://iframe.ip138.com/*",
-		    "http://www.youku.com/*",
-		    "http://v.youku.com/*",
-                    "http://www.tudou.com/*",
-		    "http://video.sina.com.cn/*",
-		    "http://m.tv.sohu.com/*",
-		    "http://tv.sohu.com/*",
-		    "http://app.tv.sohu.com/*",
-		    "http://www.flvcd.com/*"]
+    "permissions": ["http://*.ip138.com/*",
+		    "http://*.youku.com/*",
+                    "http://*.tudou.com/*",
+		    "http://*.sina.com.cn/*",
+		    "http://*.sohu.com/*",
+		    "http://*.sohu.com/*",
+		    "http://*.flvcd.com/*"]
 }

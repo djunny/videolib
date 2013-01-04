@@ -1,5 +1,0 @@
-({
-    appDir: "./",
-    baseUrl: "./src",
-    dir: "./"
-})
