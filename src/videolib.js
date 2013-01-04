@@ -127,7 +127,10 @@
 				
 				if(urlHtml.length>0){
 					while((arr = aHrefRe.exec(urlHtml)) !=null){
-						urlList.push(arr[1].replace(/\&amp;/ig, '&'));
+						var tmpUrl = arr[1].replace(/\&amp;/ig, '&');
+						//replace ip
+						tmpUrl = tmpUrl.replace(/d{1,3}\.d{1,3}\.d{1,3}\.d{1,3}/ig, self.getIp());
+						urlList.push(tmpUrl);
 					}
 				}
 				callback(url, urlList);
