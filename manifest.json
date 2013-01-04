@@ -24,9 +24,8 @@
     },
     "permissions": ["http://*.ip138.com/*",
 		    "http://*.youku.com/*",
-                    "http://*.tudou.com/*",
+			"http://*.tudou.com/*",
 		    "http://*.sina.com.cn/*",
-		    "http://*.sohu.com/*",
 		    "http://*.sohu.com/*",
 		    "http://*.flvcd.com/*"]
 }
