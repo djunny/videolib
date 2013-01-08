@@ -1,4 +1,4 @@
-lasted url:
+lastest inlcude url:
 
 http://img.wdjimg.com/webstore/resource/videolib/release-2.0.js
 
