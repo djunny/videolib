@@ -1,5 +1,13 @@
+
+
 Update
 ========
+
+	2013.1.8
+	
+	1. add m3u8 parser function.
+	2. add v.qq.com rule
+	3. fix tudou rule problem.
 
 	2013.1.5
 

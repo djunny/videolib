@@ -8,7 +8,7 @@
 2、add this script
 3、call videoLib.parseDownloadUrl(url, function(fromUrl, downUrl){}); 
 -->
-<script type="text/javascript" src="http://img.wdjimg.com/webstore/resource/videolib/release.js"></script>
+<script type="text/javascript" src="http://img.wdjimg.com/webstore/resource/videolib/release-2.0.js"></script>
 </head>
 
 <body>
@@ -17,13 +17,13 @@
 
 //plz run it in wandoujia.
 //download call
-videoLib.parseDownloadUrl('http://v.youku.com/v_show/id_XNDk3NDI4NjEy.html?f=18786646', function(fromUrl, downUrl){
+videoLib.parseDownloadUrl('http://v.youku.com/v_show/id_XNDk3NDI4NjEy.html', function(fromUrl, downUrl){
 	console.log(fromUrl);//fromurl=http://v.youku.com/v_show/id_XNDk3NDI4NjEy.html?f=18786646
 	console.log(downUrl);//is download url list
 	//build download link
 	if(downUrl){
 		//the title must hold on by your self
-		document.getElementById('result').innerHTML = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
+		document.getElementById('result').innerHTML = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&filename=filename.mp4&name=downloadname&content-type=video" download="filename.mp4">'+fromUrl+'</a>';
 	}else{
 		document.getElementById('result').innerHTML = 'failed';
 	}

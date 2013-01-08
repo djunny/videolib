@@ -26,6 +26,7 @@
 		    "http://*.youku.com/*",
 			"http://*.tudou.com/*",
 		    "http://*.sina.com.cn/*",
-		    "http://*.sohu.com/*",
+            "http://*.sohu.com/*",
+            "http://*.qq.com/*",
 		    "http://*.flvcd.com/*"]
 }

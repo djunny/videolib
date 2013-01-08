@@ -5,9 +5,11 @@
 <title></title>
 <!--script type="text/javascript" src="../src/videolib.js"></script>
 <script type="text/javascript" src="../src/http.js"></script>
-<script type="text/javascript" src="../src/youku.js"></script>
-<script type="text/javascript" src="../src/sina.js"></script>
-<script type="text/javascript" src="../src/sohu.js"></script-->
+<script type="text/javascript" src="../src/rule/youku.js"></script>
+<script type="text/javascript" src="../src/rule/tudou.js"></script>
+<script type="text/javascript" src="../src/rule/sina.js"></script>
+<script type="text/javascript" src="../src/rule/sohu.js"></script>
+<script type="text/javascript" src="../src/rule/qq.js"></script-->
 <script type="text/javascript" src="../videolib-release.js"></script>
 <script type="text/javascript" src="./jquery.js"></script>
 </head>
@@ -27,6 +29,8 @@ http://tv.sohu.com/20121127/n358826127.shtml
 http://tv.sohu.com/20121214/n360465550.shtml
 http://tv.sohu.com/20120928/n354133586.shtml
 http://www.tudou.com/programs/view/SUTBLY8Y4B8/?fr=rec2
+http://m.tv.sohu.com/20100303/n270550279.shtml
+http://v.qq.com/cover/w/wxphttuvwmtr903/r0011taeydq.html
 </textarea><br />
 <button type="button" id="btn">开始获取</button>
 <div id="result">
@@ -49,7 +53,7 @@ http://www.tudou.com/programs/view/SUTBLY8Y4B8/?fr=rec2
 				}else{
 					console.log(fromUrl);
 					console.log(downUrl);
-					ahref = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
+					ahref = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&filename=1.mp4&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
 				}
 				
 				$('#result').append((index++)+'、'+ahref+'<br />');

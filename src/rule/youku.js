@@ -1,6 +1,6 @@
 (function(videoLib){
 	var opt = {
-				matches  : [/^http\:\/\/v\.youku\.com\/v_show\/id_([\w=]+).html$/ig],
+				matches  : [/^http\:\/\/v\.youku\.com\/v_show\/id_([\w=]+).html/ig],
 				
 				download : false,
 				requestHeader : {"User-Agent":"ipad"},  
@@ -21,17 +21,15 @@
 							http(m3u8Url, {"User-Agent":"ipad"}, function(response, success){
 								if(success){
 									var data = response.responseText;
-									var urls = data.split(/\n/ig), sUrl, urlList=[], urlExists=[];
-									for(var i = 0, l = urls.length; i < l; i++){
-										if(urls[i].search('/-1/')==-1 && urls[i].search(/http\:\/\//ig)>-1){
-											var url = urls[i].split('.ts')[0];
-											if(!urlExists[url]){
-												urlList.push(url);
-												urlExists[url] = 1;
-											}
-										}
-									}
-									successCallback(urlList);
+									
+									var list = videoLib.splitM3U8List(data, function(url){
+													if(url.search(/-1/)==-1 && url.search(/http\:\/\//ig)>-1){
+														return url.split('.ts')[0];
+													}else{
+														return false;
+													}
+												});
+									successCallback(list);
 								}else{
 									successCallback();
 								}

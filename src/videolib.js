@@ -77,6 +77,10 @@
 		
 		self.parseDownloadUrl = function(url, callback){
 			var index = ruleList.length, rule;
+			if(!url){
+				return;
+			}
+			url = url.replace(/#.+$/ig, '');
 			while(index--){
 				rule = ruleList[index];
 				if(matchRules(url, rule['matches'])){
@@ -147,6 +151,24 @@
 				});
 			}
 			return self.clientIp;
+		}
+		
+		self.splitM3U8List = function(data, filterCallback){
+			var urls = data.split(/\n/ig), sUrl, urlList=[], urlExists=[];
+			for(var i = 0, l = urls.length, url; i < l; i++){
+				if(urls[i] && urls[i].search(/https?\:\/\//ig)==-1)continue;
+				if(filterCallback){
+					urls[i] = filterCallback(urls[i]);
+				}
+				url = urls[i];
+				if(url){
+					if(!urlExists[url]){
+						urlList.push(url);
+						urlExists[url] = 1;
+					}
+				}
+			}
+			return urlList;
 		}
 		
 		return self;
