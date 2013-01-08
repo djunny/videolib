@@ -1,3 +1,10 @@
+lasted url:
+
+http://img.wdjimg.com/webstore/resource/videolib/release-2.0.js
+
+or
+
+https://raw.github.com/djunny/videolib/master/release-2.0.js
 
 
 Update
@@ -8,16 +15,16 @@ Update
 	1. add m3u8 parser function.
 	2. add v.qq.com rule
 	3. fix tudou rule problem.
-
+	
 	2013.1.5
 
-		1. [tudou]auto replace client ip in download url.
+	1. [tudou]auto replace client ip in download url.
 
 Useage
 ========
 
 	1. open manifest.json and add "permissions" in your wandoujia plugin's manifest;
-	2. include this script : http://img.wdjimg.com/webstore/resource/videolib/release-1.0.js
+	2. include this lastest script library.
 	3. call *videoLib.parseDownloadUrl(url, function(fromUrl, downUrl){}); *
 
 
@@ -25,3 +32,9 @@ Example
 ========
 
 	[example 1](https://github.com/djunny/videolib/blob/master/examples/1/index.htm)
+
+
+
+old version
+========
+https://raw.github.com/djunny/videolib/master/release-1.0.js
