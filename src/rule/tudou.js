@@ -5,20 +5,24 @@
 				requestHeader : {},  
 				callback : function(url, response, successCallback){
 					var vid = videoLib.strCut(url, 'view/', '/');
-					http('http://www.tudou.com/programs/view/'+vid+'/', {}, function(url, response, successCallback){
-						var html = response.responseText;
-						var timestamp = Math.round(Date.parse(new Date())/1000);
-						var m3u8Url = 'http://v.youku.com/player/getM3U8/vid/'+videoLib.match(html, /iid: (\d+)/ig)+'/type/mp4/ts/'+timestamp+'/v.m3u8';
-						var title = videoLib.match(html, /<title>(.*?)—在线播放—/ig);
-						http(m3u8Url, {}, function(response, success){
-											if(success){
-												var list = videoLib.splitM3U8List(data, function(url){
-													return url;
-												});
-												successCallback(list);
-											}
-										});
-										
+					http('http://www.tudou.com/programs/view/'+vid+'/', {}, function(response, success){
+						if(success){
+							var html = response.responseText;
+							var m3u8Url = 'http://v.youku.com/player/getM3U8/vid/'+videoLib.match(/iid: (\d+)/ig, html)+'/type/mp4/ts/'+videoLib.timestamp()+'/v.m3u8';
+							var title = videoLib.match(/<title>(.*?)—在线播放—/ig, html);
+							http(m3u8Url, {}, function(response, success){
+												if(success){
+													var list = videoLib.splitM3U8List(response.responseText, function(url){
+														return url;
+													});
+													successCallback(list);
+												}else{
+													successCallback();
+												}
+											});
+						}else{
+							successCallback();
+						}
 					});
 				}
 			}

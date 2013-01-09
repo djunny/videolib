@@ -11,8 +11,7 @@
 					http('http://v.youku.com/v_show/id_'+vid+'.html?x', {"User-Agent":"ipad"}, function(response, success){
 						if(success){
 							//get timestamp
-							var timestamp = parseInt((new Date).getTime() / 1E3);
-							var m3u8Url = 'http://v.youku.com/player/getM3U8/vid/' + videoLib.strCut(response.responseText, 'videoId = \'', '\'') + '/type/mp4/ts/' + timestamp + '/v.m3u8';
+							var m3u8Url = 'http://v.youku.com/player/getM3U8/vid/' + videoLib.strCut(response.responseText, 'videoId = \'', '\'') + '/type/mp4/ts/' + videoLib.timestamp() + '/v.m3u8';
 							/*
 							successCallback(m3u8Url);
 							return;

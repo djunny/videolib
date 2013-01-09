@@ -1,14 +1,17 @@
 lastest inlcude url:
 
-http://img.wdjimg.com/webstore/resource/videolib/release-2.0.js
+http://img.wdjimg.com/webstore/resource/videolib/release-3.0.js
 
 or
 
-https://raw.github.com/djunny/videolib/master/release-2.0.js
+https://raw.github.com/djunny/videolib/master/release-3.0.js
 
 
 Update
 ========
+
+	2013.1.9
+	1. update qq video rule
 
 	2013.1.8
 	

@@ -23,10 +23,11 @@
       ]
     },
     "permissions": ["http://*.ip138.com/*",
-		    "http://*.youku.com/*",
-			"http://*.tudou.com/*",
-		    "http://*.sina.com.cn/*",
-            "http://*.sohu.com/*",
-            "http://*.qq.com/*",
-		    "http://*.flvcd.com/*"]
+		"http://*.youku.com/*",
+		"http://*.tudou.com/*",
+		"http://*.sina.com.cn/*",
+		"http://*.sohu.com/*",
+		"http://*.letv.com/*",
+		"http://*.qq.com/*",
+		"http://*.flvcd.com/*"]
 }

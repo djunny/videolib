@@ -8,7 +8,7 @@
 	}
     var match = function (reg, html){
        var res = reg.exec(html);
-       return res.length>1 ? res[1] : '';
+       return (res && res.length>1) ? res[1] : '';
     }
 	
 	var videoLibClass = function(){
@@ -93,7 +93,7 @@
 						window.http(url, rule['requestHeader'], function(response, succ){
 							if(succ){
 								rule['callback'](url, response.responseText, function(trueUrl){
-									if(!trueUrl){
+									if(!trueUrl || trueUrl.length == 0){
 										self.tryFlvcd(url, callback);
 									}else{
 										callback(url, trueUrl);
@@ -104,7 +104,7 @@
 					}else{
 						//callback
 						rule['callback'](url, null, function(trueUrl){
-							if(!trueUrl){
+							if(!trueUrl || trueUrl.length == 0){
 								self.tryFlvcd(url, callback);
 							}else{
 								callback(url, trueUrl);
@@ -151,6 +151,11 @@
 				});
 			}
 			return self.clientIp;
+		}
+		
+		//get timestamp
+		self.timestamp = function(){
+			return parseInt((new Date).getTime() / 1E3)
 		}
 		
 		self.splitM3U8List = function(data, filterCallback){
