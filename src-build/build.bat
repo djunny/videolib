@@ -1,13 +1,13 @@
 @echo off
 ECHO "START MERGE"
-REM jsmin <"../src/base64.js"> ".\min\base64.js"
+jsmin <"../src/base64.js"> ".\min\base64.js"
 jsmin <"../src/http.js"> ".\min\http.js"
 
 jsmin <"../src/videolib.js"> ".\min\videolib.js"
 
 for %%i in (../src/rule/*.js) do jsmin <"../src/rule/%%i"> "rule\%%i.js"
 jsmin <"../src/rule/sina.js"> "min\sina.js"
-copy .\min\videolib.js+.\min\http.js+.\rule\*.js ..\release-latest.js /B /Y
+copy .\min\base64.js+.\min\videolib.js+.\min\http.js+.\rule\*.js ..\release-latest.js /B /Y
 
 for /l %%a in (1, 1, 999) do (
 	if not exist ..\release-%%a.0.js (
