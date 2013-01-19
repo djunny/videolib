@@ -1,6 +1,6 @@
 (function(videoLib){
 	var opt = {
-				matches  : [/^http:\/\/v\.qq\.com\/(cover|prev)\/\w+\/\w+\/\w+\.html/ig],
+				matches  : [/^http:\/\/v\.qq\.com\/(cover|prev)\/(\w+\/)?\w+\/\w+\.html/ig],
 				download : false,
 				requestHeader : {"User-Agent":"ipad"},  
 				callback : function(url, response, successCallback){
