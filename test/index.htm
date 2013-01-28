@@ -58,7 +58,7 @@ http://v.qq.com/prev/l/lnwfyrbt50sfghn/j0011ewxwio.html
 				}else{
 					console.log(fromUrl);
 					console.log(downUrl);
-					ahref = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&filename=1.mp4&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a>';
+					ahref = '<a href="'+fromUrl+'#urls='+encodeURIComponent(downUrl.join('|'))+'&filename=1.mp4&name=1.mp4&content-type=video" rel="download">'+fromUrl+'</a> <input type="text" value="'+downUrl.join('|')+'" style="width:100%;" />';
 				}
 				
 				$('#result').append((index++)+'、'+ahref+'<br />');
