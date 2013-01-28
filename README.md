@@ -9,12 +9,9 @@ https://raw.github.com/djunny/videolib/master/release-3.0.js
 
 Update
 ========
-<<<<<<< HEAD
 	2013.1.29
 	1. example add show url list.
 
-=======
->>>>>>> 4e07112ca9206a2c38e9624eb90ad936d4ab01a4
 	2013.1.19
 	1. add base64 lib
 	2. fix letv rule
